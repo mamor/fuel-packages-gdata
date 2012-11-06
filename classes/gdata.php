@@ -34,7 +34,8 @@ class Gdata
 		$client->setClientId($config['client_id']);
 		$client->setClientSecret($config['client_secret']);
 		$client->setRedirectUri($config['redirect_uri']);
-		$client->setDeveloperKey($config['developer_key']);
+		$client->setDeveloperKey($config['api_key']);
+		$client->setAccessType($config['access_type']);
 
 		$this->client = $client;
 		$this->service = new $service_class($client);

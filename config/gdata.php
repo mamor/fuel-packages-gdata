@@ -3,5 +3,6 @@ return array(
 	'client_id' => '',
 	'client_secret' => '',
 	'redirect_uri' => '',
-	'developer_key' => '',
+	'api_key' => '',
+	'access_type' => 'offline',
 );
