@@ -31,6 +31,7 @@ class Gdata
 		$config = array_merge(\Config::get('gdata'), $config);
 
 		$client = new \Google_Client();
+		$client->setApplicationName($config['application_name']);
 		$client->setClientId($config['client_id']);
 		$client->setClientSecret($config['client_secret']);
 		$client->setRedirectUri($config['redirect_uri']);
