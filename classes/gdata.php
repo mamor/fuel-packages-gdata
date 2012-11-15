@@ -36,6 +36,7 @@ class Gdata
 		$client->setClientSecret($config['client_secret']);
 		$client->setRedirectUri($config['redirect_uri']);
 		$client->setDeveloperKey($config['api_key']);
+		$client->setScopes($config['scopes']);
 		$client->setAccessType($config['access_type']);
 
 		$this->client = $client;
