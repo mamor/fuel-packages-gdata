@@ -1,7 +1,7 @@
 # FuelPHP Package for Gdata
 
 This package depend on google-api-php-client.  
-[https://code.google.com/p/google-api-php-client/](https://code.google.com/p/google-api-php-client/)
+https://code.google.com/p/google-api-php-client/
 
 ***
 
