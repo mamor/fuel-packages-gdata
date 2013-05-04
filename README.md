@@ -5,6 +5,12 @@ https://code.google.com/p/google-api-php-client/
 
 ***
 
+## Install
+### Setup to fuel/packages/gdata
+* Use composer https://packagist.org/packages/mp-php/fuel-packages-gdata
+* git submodule add
+* Download zip
+
 ## Usage
 ### 1: Configuration
 1. Copy packages/gdata/config/gdata.php to under app/config directory.  
