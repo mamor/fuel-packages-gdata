@@ -2,21 +2,104 @@
 
 namespace Gdata;
 
+/**
+ * FuelPHP Gdata package
+ *
+ * @author    Mamoru Otsuka http://madroom-project.blogspot.jp/
+ * @copyright 2013 Mamoru Otsuka
+ * @license   MIT License http://www.opensource.org/licenses/mit-license.php
+ */
 class Gdata
 {
+	/**
+	 * @var Gdata
+	 */
 	protected static $_instance;
+
+	/**
+	 * @var array
+	 */
 	protected static $_instances = array();
 
-	public $client;
-	public $service;
-
+	/*
+	 * Initialize
+	 */
 	public static function _init()
 	{
 		\Config::load('gdata', true);
 	}
 
+	/**
+	 * Forge
+	 * 
+	 * @param  string $service
+	 * @param  string $name
+	 * @param  array $config
+	 * @return Gdata
+	 */
+	public static function forge($service = null, $name = 'default', array $config = array())
+	{
+		
+		if ($exists = static::instance($name))
+		{
+			\Error::notice('Gdata with this name exists already, cannot be overwritten.');
+			return $exists;
+		}
 
-	public function __construct($service, $name, $config)
+		static::$_instances[$name] = new static($service, $config);
+
+		if ($name == 'default')
+		{
+			static::$_instance = static::$_instances[$name];
+		}
+
+		return static::$_instances[$name];
+	}
+
+	/**
+	 * Get instance
+	 * 
+	 * @param  string $instance
+	 * @return mixed
+	 */
+	public static function instance($instance = null)
+	{
+		if ($instance !== null)
+		{
+			if ( ! array_key_exists($instance, static::$_instances))
+			{
+				return false;
+			}
+
+			return static::$_instances[$instance];
+		}
+
+		if (static::$_instance === null)
+		{
+			static::$_instance = static::forge();
+		}
+
+		return static::$_instance;
+	}
+
+	/**
+	 * Google \Google_Client
+	 */
+	public $client;
+
+	/**
+	 * Google Service Class
+	 */
+	public $service;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param  string $service
+	 * @param  array $config
+	 * @throws \FuelException
+	 */
+	public function __construct($service, array $config)
 	{
 		require_once PKGPATH."gdata/vendor/google-api-php-client/src/Google_Client.php";
 
@@ -41,45 +124,6 @@ class Gdata
 
 		$this->client = $client;
 		$this->service = new $service_class($client);
-	}
-
-	public static function forge($service = null, $name = 'default', array $config = array())
-	{
-		
-		if ($exists = static::instance($name))
-		{
-			\Error::notice('Gdata with this name exists already, cannot be overwritten.');
-			return $exists;
-		}
-
-		static::$_instances[$name] = new static($service, $name, $config);
-
-		if ($name == 'default')
-		{
-			static::$_instance = static::$_instances[$name];
-		}
-
-		return static::$_instances[$name];
-	}
-
-	public static function instance($instance = null)
-	{
-		if ($instance !== null)
-		{
-			if ( ! array_key_exists($instance, static::$_instances))
-			{
-				return false;
-			}
-
-			return static::$_instances[$instance];
-		}
-
-		if (static::$_instance === null)
-		{
-			static::$_instance = static::forge();
-		}
-
-		return static::$_instance;
 	}
 
 }

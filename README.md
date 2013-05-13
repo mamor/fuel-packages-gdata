@@ -8,28 +8,26 @@ https://code.google.com/p/google-api-php-client/
 ## Install
 ### Setup to fuel/packages/gdata
 * Use composer https://packagist.org/packages/mp-php/fuel-packages-gdata
-* git submodule add
+* git submodule
 * Download zip
 
-## Usage
-### 1: Configuration
-1. Copy packages/gdata/config/gdata.php to under app/config directory.  
-2. Edit gdata.php that copied.
+### Configuration
 
-### 2: Enable Gdata package.
-##### In app/config/config.php
+##### One
+In app/config/config.php
 
 	'always_load' => array('packages' => array(
 		'gdata',
 		...
 
-or
-
-##### In your code
+or in your code
 
 	Package::load('gdata');
 
-### 3: Forge Gdata
+##### Two
+Copy packages/gdata/config/gdata.php to under app/config directory and edit
+
+### Usage
 
 	$gdata = Gdata::forge(
 		$service_name,
