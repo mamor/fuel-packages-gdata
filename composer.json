@@ -2,7 +2,8 @@
 	"name": "mp-php/fuel-packages-gdata",
 	"type": "fuel-package",
 	"require": {
-		"composer/installers": "*"
+		"composer/installers": "*",
+		"google/apiclient": "1.*@dev"
 	},
 	"extra": {
 		"installer-name": "gdata"

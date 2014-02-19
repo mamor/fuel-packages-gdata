@@ -2,6 +2,15 @@
 
 namespace Gdata;
 
+if (file_exists(__DIR__.'/../vendor/autoload.php'))
+{
+	require_once __DIR__.'/../vendor/autoload.php';
+}
+else
+{
+	require_once VENDORPATH.'autoload.php';
+}
+
 /**
  * FuelPHP Gdata package
  *
@@ -101,11 +110,7 @@ class Gdata
 	 */
 	public function __construct($service, array $config)
 	{
-		require_once PKGPATH."gdata/vendor/google-api-php-client/src/Google_Client.php";
-
-		$service_class = 'Google_'.ucfirst(strtolower($service)).'Service';
-		require_once PKGPATH."gdata/vendor/google-api-php-client/src/contrib/{$service_class}.php";
-
+		$service_class = '\Google_Service_'.$service;
 		if( ! class_exists($service_class))
 		{
 			throw new \FuelException('Could not find Gdata service class: '.$service_class);
